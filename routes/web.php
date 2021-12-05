@@ -3,6 +3,8 @@
 use App\Http\Controllers\LoginAPIController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\UserController;
+use App\Models\Inform;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -30,9 +32,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/tablas-dashboard', function () {
-    return view('dashboard',
+    return view('informes',
         [
             'users'=>User::all(),
+            'tasks'=>Task::all(),
+            'informes'=>Inform::all(),
         ]
     );
 })->name('tablas');
