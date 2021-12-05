@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\LoginAPIController;
 use App\Http\Controllers\TasksController;
+use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +22,23 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard',
+        [
+            'users'=>User::all(),
+        ]
+    );
 })->name('dashboard');
 
-Route::post('/login', [LoginAPIController::class, 'login']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/tablas-dashboard', function () {
+    return view('dashboard',
+        [
+            'users'=>User::all(),
+        ]
+    );
+})->name('tablas');
+
+Route::post('/login_api', [LoginAPIController::class, 'login']);
 
 Route::post('/tasks', [TasksController::class, 'userTasks']);
+
+Route::post('/user_info', [UserController::class, 'getUserData']);
