@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginAPIController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\UserController;
@@ -31,18 +33,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     );
 })->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/tablas-dashboard', function () {
-    return view('informes',
-        [
-            'users'=>User::all(),
-            'tasks'=>Task::all(),
-            'informes'=>Inform::all(),
-        ]
-    );
-})->name('tablas');
+Route::middleware(['auth:sanctum', 'verified'])->get('/tablas-dashboard', [DashboardController::class, 'tables'])->name('tablas');
 
 Route::post('/login_api', [LoginAPIController::class, 'login']);
 
 Route::post('/tasks', [TasksController::class, 'userTasks']);
 
 Route::post('/user_info', [UserController::class, 'getUserData']);
+
+Route::post('/create_task', [AdminController::class, 'create_task']);

@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-6 mt-5">
-                <form action="" method="post">
+                <form action="{{ url('/create_task') }}" method="post">
                     @csrf
                     <h3>Ingresar nueva tarea</h3>
                     <div class="mb-3">
