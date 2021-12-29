@@ -11,4 +11,9 @@ class UserController extends Controller
     {
         return User::where('email', $request->email)->first();
     }
+
+    public function get_users()
+    {
+        return User::all();
+    }
 }

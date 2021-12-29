@@ -41,4 +41,6 @@ Route::post('/tasks', [TasksController::class, 'userTasks']);
 
 Route::post('/user_info', [UserController::class, 'getUserData']);
 
+Route::get('/contacts', [UserController::class, 'get_users']);
+
 Route::post('/create_task', [AdminController::class, 'create_task']);
